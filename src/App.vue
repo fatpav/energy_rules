@@ -1,33 +1,34 @@
 <template>
-  <fuel-chart :chartData="chartData"></fuel-chart>  
+  <main>
+    <header>
+      <h1>National Grid Distribution</h1>
+    </header>
+    <fuel-chart :natGrid="natGrid"></fuel-chart>
+    <footer>
+      <p>Brought to you by Maria, Paul, Mat and special thanks to our good friend caffeine</p>
+    </footer>
+  </main>
 </template>
 
 <script>
 import FuelChart from './components/FuelChart.vue'
 
+
 export default {
   name: 'app',
   
-
   data() {
     return {
-      natGrid: [],
-      chartData: []
+      natGrid: null
     }
   },
 
-  // computed: {
-  //   dataHandler: function() {
-  //     return natGrid.data.generationmix.map(pair => {
-  //      return chartData = [pair.fuel, pair.perc]
-    //   })
-    // }
-  // },
-
+  
   mounted() {
     fetch('https://api.carbonintensity.org.uk/generation')
     .then(response => response.json())
-    .then(natGrid => this.natGrid = natGrid)
+    .then(natGrid => this.natGrid = natGrid.data)
+    
   },
   components: {
     "fuel-chart":FuelChart
