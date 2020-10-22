@@ -3,6 +3,8 @@
 ## Project setup
 ```
 npm install
+npm install moment
+npm install vue-google-charts
 ```
 
 ### Compiles and hot-reloads for development
