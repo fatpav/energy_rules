@@ -13,6 +13,7 @@
 
 <script>
 import { GChart } from 'vue-google-charts'
+import moment from 'moment'
 
 export default {
     data() {
