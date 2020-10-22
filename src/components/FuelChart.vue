@@ -1,9 +1,9 @@
 <template>
 
 <section v-if='natGrid'>
-    <h1>Check my badass chart!</h1>
+    <h1>Percentage of national grid by fuel type in the last 30 minutes since {{ timefixer() }}:</h1>
     <GChart
-        type="ColumnChart"
+        type="PieChart"
         :data="chartData"
         :options="chartOptions"
         />
@@ -18,6 +18,9 @@ export default {
     data() {
         return {
         chartOptions: {
+            height: 500,
+            width:1000,
+            is3D: true,
             chart: {
                 title:'Please please work',
                 subtitle:'A study of some things'
@@ -33,6 +36,15 @@ export default {
                     return [pair.fuel, pair.perc]
                 })
             ]
+        },
+    },    
+    methods: {
+        timefixer() {
+            const str = `${ this.natGrid.from }`;
+            const date = moment(str);
+            const dateComponent = date.utc().format('YYYY-MM-DD');
+            const timeComponent = date.utc().format('HH:mm:ss');
+            return `${dateComponent} at ${timeComponent}`
         }
     },
     name: 'fuel-chart',
@@ -41,8 +53,6 @@ export default {
         GChart,
     }
 }
-
-
 </script>
 
 <style>
